@@ -432,7 +432,7 @@ public Object invoke(Object arg1, Object arg2, Object arg3, Object arg4, Object 
 }
 
 public Object invoke(Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6) {
-  return fn().invoke(Util.ret1(Util.ret1(arg1, arg1 = null), Util.ret1(arg1, arg1 = null) = null), Util.ret1(Util.ret1(arg2, arg2 = null), Util.ret1(arg2, arg2 = null) = null), Util.ret1(Util.ret1(arg3, arg3 = null), Util.ret1(arg3, arg3 = null) = null), Util.ret1(Util.ret1(arg4, arg4 = null), Util.ret1(arg4, arg4 = null) = null), Util.ret1(Util.ret1(arg5, arg5 = null), Util.ret1(arg5, arg5 = null) = null), Util.ret1(Util.ret1(arg6, arg6 = null), Util.ret1(arg6, arg6 = null) = null));
+  return fn().invoke(Util.ret1(arg1, arg1 = null), Util.ret1(arg2, arg2 = null), Util.ret1(arg3, arg3 = null), Util.ret1(arg4, arg4 = null), Util.ret1(arg5, arg5 = null), Util.ret1(arg6, arg6 = null));
 }
 
 public Object invoke(Object arg1, Object arg2, Object arg3, Object arg4, Object arg5, Object arg6, Object arg7)

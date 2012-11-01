@@ -30,7 +30,7 @@ public DelayedSeq(IPersistentMap meta, IFn fn) {
   this.fn = fn;
 }
 
-public Obj withMeta(IPersistentMap meta, IFn fn){
+public Obj withMeta(IPersistentMap meta){
   return new DelayedSeq(meta, this.fn);
 }
 
@@ -40,7 +40,7 @@ final synchronized Object sval(){
     return result;
   try
     {
-      return (s = new SoftReference(fn.invoke())).get();
+      return (s = new WeakReference<ISeq>(fn.invoke())).get();
     }
   catch(RuntimeException e)
     {
@@ -60,9 +60,9 @@ final synchronized public ISeq seq(){
     sv = null;
     while(ls instanceof DelayedSeq || ls instanceof LazySeq)
       {
-      ls = ((LazySeq)ls).sval();
+        ls = s instanceof LazySeq ? ((LazySeq)ls).sval() : ((DelayedSeq)ls).sval();
       }
-    s = RT.seq(ls);
+    s = new WeakReference<ISeq>(RT.seq(ls));
     }
   return s;
 }
@@ -76,23 +76,29 @@ public int count(){
 
 public Object first(){
   seq();
-  if(s == null)
-    return null;
-  return s.first();
+  synchronized (s) {
+    if(s == null || s.get() == null)
+      return null;
+    return s.get().first();
+  }
 }
 
 public ISeq next(){
   seq();
-  if(s == null)
-    return null;
-  return s.next();
+  synchronized (s) {
+    if(s == null || s.get() == null)
+      return null;
+    return s.get().next();
+  }
 }
 
 public ISeq more(){
   seq();
-  if(s == null)
-    return PersistentList.EMPTY;
-  return s.more();
+  synchronized (s) {
+    if(s == null || s.get() == null)
+      return PersistentList.EMPTY;
+    return s.get().more();
+  }
 }
 
 public ISeq cons(Object o){

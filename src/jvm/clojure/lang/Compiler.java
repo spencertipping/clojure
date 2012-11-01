@@ -3639,7 +3639,7 @@ static public class FnExpr extends ObjExpr{
   final static Type restFnType = Type.getType(RestFn.class);
 
   // Space allocation covariant with permgen
-  final static Map canonicals = new HashMap<ISeq, Expr>;
+  final static Map<ISeq, Expr> canonicals = new HashMap<ISeq, Expr>();
 
   //if there is a variadic overload (there can only be one) it is stored here
   FnMethod variadicMethod = null;
@@ -3819,9 +3819,9 @@ static public class FnExpr extends ObjExpr{
         fn.getCompiledClass();
 
         Expr result;
-        canonicals.put(form, fn.supportsMeta()
-          ? result = new MetaExpr(fn, MapExpr.parse(context == C.EVAL ? context : C.EXPRESSION, fmeta))
-          : result = fn);
+        canonicals.put(form, result = fn.supportsMeta()
+          ? new MetaExpr(fn, MapExpr.parse(context == C.EVAL ? context : C.EXPRESSION, fmeta))
+          : fn);
 
         return result;
     }
