@@ -4,13 +4,14 @@
  *   Eclipse Public License 1.0 (http://opensource.org/licenses/eclipse-1.0.php)
  *   which can be found in the file epl-v10.html at the root of this distribution.
  *   By using this software in any fashion, you are agreeing to be bound by
- * 	 the terms of this license.
+ *   the terms of this license.
  *   You must not remove this notice, or any other, from this software.
  **/
 
 /* rich Nov 25, 2008 */
 
 package clojure.lang;
+import java.io.Serializable;
 
-public interface Fn{
+public interface Fn extends Serializable {
 }
